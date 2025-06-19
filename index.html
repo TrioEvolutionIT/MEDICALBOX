@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Medical Checklist - TRIO EVOLUTION</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0fdf4;
+      margin: 0;
+      padding: 20px;
+      color: #1b4332;
+    }
+    .container {
+      max-width: 850px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0, 80, 50, 0.1);
+      margin: auto;
+    }
+    .company-name {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      color: #2d6a4f;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="date"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #d8f3dc;
+      border-radius: 8px;
+      background: #f8fff9;
+      box-sizing: border-box;
+    }
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .item {
+      background: #f8fff9;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #d8f3dc;
+    }
+    .item input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 12px;
+      background-color: #2d6a4f;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #1b4332;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <img src="logo.jpg" alt="TRIO EVOLUTION Logo" style="max-width: 120px; margin-bottom: 10px;">
+    </div>
+    <div class="company-name">TRIO EVOLUTION</div>
+    <h1>Medical Checklist Form</h1>
+
+    <form id="medicalForm">
+      <label for="date">Date</label>
+      <input type="date" name="date" id="date" required>
+
+      <label for="boxNumber">Box Number</label>
+      <input type="text" name="boxNumber" id="boxNumber" required>
+
+      <div class="checklist">
+        <label class="item"><input type="checkbox" name="checklist[]" value="Cotton Roll">Cotton Roll</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Bandages 2*3">Bandages 2×3</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Betadine Solution">Betadine Solution</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Adhessive Dressing Trips (Band Aid)">Band Aid</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Savlon">Savlon</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Sterile Dressing Pads Medium">Sterile Pads (Medium)</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Soframycin">Soframycin</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Scissor">Scissor</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Triangular Bandage with Safety Pins">Triangular Bandage with Pins</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Calamine Lotion">Calamine Lotion</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="ORS">ORS</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Moov">Moov</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Relispray">Relispray</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Disprin">Disprin</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Combiflam">Combiflam</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Crocin">Crocin</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Digene">Digene</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Cotton Adhesive Tape">Cotton Adhesive Tape</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Gauze 7.5×7.5">Gauze 7.5×7.5</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Roller Bandage">Roller Bandage</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Omnigel">Omnigel</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Burnol">Burnol</label>
+        <label class="item"><input type="checkbox" name="checklist[]" value="Volini Spray">Volini Spray</label>
+      </div>
+
+      <label for="officerName">Inspector Name</label>
+      <input type="text" id="officerName" name="officerName" required>
+
+      <label for="remarks">Remarks (if any)</label>
+      <textarea name="remarks" id="remarks" rows="3"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+    const form = document.getElementById('medicalForm');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(response => {
+        alert('Form submitted successfully!');
+        form.reset();
+      })
+      .catch(error => {
+        alert('Error submitting form: ' + error.message);
+      });
+    });
+  </script>
+</body>
+</html>
